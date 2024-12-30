@@ -19,7 +19,7 @@ public class ExchangeRateSingleDayResponse implements Response {
     public ExchangeRateSingleDayResponse(CurrencyBase base, Date date, JSONObject rates) {
         this.base = base;
         this.date = date;
-        this.rates = this.loadRatesByJSONObject(rates);
+        this.rates = this.loadRatesFromJSONObject(rates);
     }
 
     @Override
@@ -37,7 +37,7 @@ public class ExchangeRateSingleDayResponse implements Response {
         }
     }
 
-    private Map<CurrencyBase, Double> loadRatesByJSONObject(JSONObject rates) {
+    private Map<CurrencyBase, Double> loadRatesFromJSONObject(JSONObject rates) {
         try {
             Map<CurrencyBase, Double> ratesMap = new HashMap<>();
 
@@ -55,5 +55,9 @@ public class ExchangeRateSingleDayResponse implements Response {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public String toString() {
+        return this.toJSON().toString();
     }
 }

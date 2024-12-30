@@ -23,7 +23,7 @@ public class ExchangeRateConfiguration implements ConnectionConfiguration {
 
     @Override
     public Integer getTimeout() {
-        return this.timeout;
+        return this.timeout * 60;
     }
 
     @Override

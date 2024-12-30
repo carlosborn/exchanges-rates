@@ -33,4 +33,8 @@ public class InfoResponse implements Response {
             throw new RuntimeException(e);
         }
     }
+
+    public String toString() {
+        return this.toJSON().toString();
+    }
 }

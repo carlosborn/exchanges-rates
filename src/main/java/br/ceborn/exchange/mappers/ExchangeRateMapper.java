@@ -2,6 +2,7 @@ package br.ceborn.exchange.mappers;
 
 import br.ceborn.exchange.enums.CurrencyBase;
 import br.ceborn.exchange.helpers.DateConverter;
+import br.ceborn.exchange.responses.ExchangeRateMultipleDaysResponse;
 import br.ceborn.exchange.responses.ExchangeRateSingleDayResponse;
 import br.ceborn.exchange.responses.Response;
 import org.json.JSONObject;
@@ -54,6 +55,16 @@ public class ExchangeRateMapper implements Mapper {
     }
 
     private void loadExchangeRateMultipleDaysResponse(JSONObject jsonObject) {
-
+        try {
+            this.response = new ExchangeRateMultipleDaysResponse(
+                    jsonObject.getDouble("amount"),
+                    CurrencyBase.getBySymbol(jsonObject.getString("base")),
+                    DateConverter.convertStringToDate(jsonObject.getString("start_date")),
+                    DateConverter.convertStringToDate(jsonObject.getString("end_date")),
+                    jsonObject.getJSONObject("rates")
+            );
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

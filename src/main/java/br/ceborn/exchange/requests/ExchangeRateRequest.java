@@ -40,8 +40,9 @@ public class ExchangeRateRequest {
         }
 
         if (this.symbols != null) {
+            parameters.append("&symbols=");
             for (CurrencyBase cb : this.symbols) {
-                parameters.append("&").append(cb.getSymbol()).append(",");
+                parameters.append(cb.getSymbol()).append(",");
             }
         }
 
