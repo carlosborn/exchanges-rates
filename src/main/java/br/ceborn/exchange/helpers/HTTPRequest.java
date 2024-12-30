@@ -9,10 +9,12 @@ import java.net.URL;
 
 public class HTTPRequest {
 
-    public static JSONObject sendGET(String urlParameter) throws Exception {
+    public static JSONObject sendGET(String urlParameter, Integer timeout) throws Exception {
         URL url = new URL(urlParameter);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        ;
         connection.setRequestMethod("GET");
+        connection.setConnectTimeout(timeout);
 
         BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
         String inputLine;

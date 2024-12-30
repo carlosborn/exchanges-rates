@@ -1,5 +1,6 @@
 package br.ceborn.exchange.connections;
 
+import br.ceborn.exchange.mappers.ExchangeRateMapper;
 import br.ceborn.exchange.mappers.InfoResponseMapper;
 import br.ceborn.exchange.mappers.Mapper;
 import lombok.AllArgsConstructor;
@@ -25,7 +26,7 @@ public class ExchangeRate {
      */
     public Response getInfos() {
         try {
-            JSONObject json = HTTPRequest.sendGET(configuration.getBaseURL());
+            JSONObject json = HTTPRequest.sendGET(configuration.getBaseURL(), configuration.getTimeout());
 
             Mapper mapper = new InfoResponseMapper();
             mapper.fromJSON(json);
@@ -41,24 +42,26 @@ public class ExchangeRate {
     }
 
     public Response getExchange(Date iniDate, Date endDate, CurrencyBase currencyBase, CurrencyBase[] symbols) {
-        ExchangeRateRequest exchangeRateRequest = new ExchangeRateRequest();
-        exchangeRateRequest.setIniDate(iniDate);
-        exchangeRateRequest.setEndDate(endDate);
-        exchangeRateRequest.setCurrencyBase(currencyBase);
-        exchangeRateRequest.setSymbols(symbols);
+
+        ExchangeRateRequest exchangeRateRequest = new ExchangeRateRequest.ExchangeRateRequestBuilder()
+                .setIniDate(iniDate)
+                .setEndDate(endDate)
+                .setCurrencyBase(currencyBase)
+                .setSymbols(symbols)
+                .build();
 
         String parameters = exchangeRateRequest.mountParameters();
+        String url = this.configuration.getCompleteURL() + parameters;
 
         try {
-            JSONObject jsonObject = HTTPRequest.sendGET(this.configuration.getCompleteURL() + parameters);
-            return this.mountResponseExchangeRate(jsonObject, exchangeRateRequest);
+            JSONObject jsonObject = HTTPRequest.sendGET(url, this.configuration.getTimeout());
+
+            Mapper exchangeRateMapper = new ExchangeRateMapper();
+            exchangeRateMapper.fromJSON(jsonObject);
+
+            return exchangeRateMapper.getLoadedResponse();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
-
-    private Response mountResponseExchangeRate(JSONObject jsonObject, ExchangeRateRequest exchangeRateRequest) {
-        return null;
-    }
-
 }

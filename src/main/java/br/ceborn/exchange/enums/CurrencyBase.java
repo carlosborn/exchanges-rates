@@ -42,4 +42,13 @@ public enum CurrencyBase {
     private final String symbol;
     private final String description;
 
+    public static CurrencyBase getBySymbol(String symbol) {
+        for (CurrencyBase currencyBase : CurrencyBase.values()) {
+            if (symbol.equals(currencyBase.getSymbol())) {
+                return currencyBase;
+            }
+        }
+        return null;
+    }
+
 }

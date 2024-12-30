@@ -14,4 +14,13 @@ public class DateConverter {
         }
     }
 
+    public static Date convertStringToDate(String date) {
+        try {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            return format.parse(date);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }
