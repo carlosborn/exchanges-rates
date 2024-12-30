@@ -1,13 +1,14 @@
-package org.exchange.connection;
+package br.ceborn.exchange.connections;
 
+import br.ceborn.exchange.mappers.InfoResponseMapper;
+import br.ceborn.exchange.mappers.Mapper;
 import lombok.AllArgsConstructor;
-import org.exchange.configuration.ConnectionConfiguration;
-import org.exchange.configuration.ExchangeRateConfiguration;
-import org.exchange.enums.CurrencyBase;
-import org.exchange.helpers.HTTPRequest;
-import org.exchange.requests.ExchangeRateRequest;
-import org.exchange.responses.InfoResponse;
-import org.exchange.responses.Response;
+import br.ceborn.exchange.configurations.ConnectionConfiguration;
+import br.ceborn.exchange.enums.CurrencyBase;
+import br.ceborn.exchange.helpers.HTTPRequest;
+import br.ceborn.exchange.requests.ExchangeRateRequest;
+import br.ceborn.exchange.responses.InfoResponse;
+import br.ceborn.exchange.responses.Response;
 import org.json.JSONObject;
 
 import java.util.Date;
@@ -26,10 +27,10 @@ public class ExchangeRate {
         try {
             JSONObject json = HTTPRequest.sendGET(configuration.getBaseURL());
 
-            Response response = new InfoResponse();
-            response.fromJSON(json);
+            Mapper mapper = new InfoResponseMapper();
+            mapper.fromJSON(json);
 
-            return response;
+            return mapper.getLoadedResponse();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

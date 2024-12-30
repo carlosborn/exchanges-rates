@@ -1,4 +1,4 @@
-package org.exchange.helpers;
+package br.ceborn.exchange.helpers;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

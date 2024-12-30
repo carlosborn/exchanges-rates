@@ -1,4 +1,4 @@
-package org.exchange.configuration;
+package br.ceborn.exchange.configurations;
 
 import org.json.JSONObject;
 

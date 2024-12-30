@@ -1,8 +1,4 @@
-package org.exchange.configuration;
-
-import org.json.JSONObject;
-
-import java.util.Map;
+package br.ceborn.exchange.configurations;
 
 public interface ConnectionConfiguration {
 

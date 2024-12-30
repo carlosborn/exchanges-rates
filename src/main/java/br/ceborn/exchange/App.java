@@ -1,7 +1,7 @@
-package org.exchange;
+package br.ceborn.exchange;
 
-import org.exchange.configuration.ExchangeRateConfiguration;
-import org.exchange.connection.ExchangeRate;
+import br.ceborn.exchange.configurations.ExchangeRateConfiguration;
+import br.ceborn.exchange.connections.ExchangeRate;
 
 public class App {
     public static void main(String[] args) {

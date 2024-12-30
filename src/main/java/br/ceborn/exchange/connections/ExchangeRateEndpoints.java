@@ -1,4 +1,4 @@
-package org.exchange.connection;
+package br.ceborn.exchange.connections;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

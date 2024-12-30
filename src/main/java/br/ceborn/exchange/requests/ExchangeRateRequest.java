@@ -1,9 +1,9 @@
-package org.exchange.requests;
+package br.ceborn.exchange.requests;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.exchange.enums.CurrencyBase;
-import org.exchange.helpers.DateConverter;
+import br.ceborn.exchange.enums.CurrencyBase;
+import br.ceborn.exchange.helpers.DateConverter;
 
 import java.util.Date;
 

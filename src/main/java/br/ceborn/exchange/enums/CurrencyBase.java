@@ -1,4 +1,4 @@
-package org.exchange.enums;
+package br.ceborn.exchange.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

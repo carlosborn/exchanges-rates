@@ -1,4 +1,4 @@
-package org.exchange;
+package br.ceborn.exchange;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

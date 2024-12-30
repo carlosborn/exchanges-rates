@@ -1,4 +1,4 @@
-package org.exchange.helpers;
+package br.ceborn.exchange.helpers;
 
 import org.json.JSONObject;
 
