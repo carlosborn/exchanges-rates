@@ -57,6 +57,18 @@ public class ExchangeRate {
         return this.getExchange(new Date(), null, CurrencyBase.USD, null);
     }
 
+    public Response getExchange(Date iniDate){
+        return this.getExchange(iniDate, null, CurrencyBase.USD, null);
+    }
+
+    public Response getExchange(Date iniDate, Date endDate){
+        return this.getExchange(iniDate, endDate, CurrencyBase.USD, null);
+    }
+
+    public Response getExchange(Date iniDate, Date endDate, CurrencyBase currencyBase){
+        return this.getExchange(iniDate, endDate, currencyBase, null);
+    }
+
     public Response getExchange(Date iniDate, Date endDate, CurrencyBase currencyBase, CurrencyBase[] symbols) {
 
         ExchangeRateRequest exchangeRateRequest = new ExchangeRateRequest.ExchangeRateRequestBuilder()
