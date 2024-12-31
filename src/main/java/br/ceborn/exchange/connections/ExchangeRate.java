@@ -1,5 +1,6 @@
 package br.ceborn.exchange.connections;
 
+import br.ceborn.exchange.mappers.CurrencyMapper;
 import br.ceborn.exchange.mappers.ExchangeRateMapper;
 import br.ceborn.exchange.mappers.InfoResponseMapper;
 import br.ceborn.exchange.mappers.Mapper;
@@ -29,6 +30,21 @@ public class ExchangeRate {
             JSONObject json = HTTPRequest.sendGET(configuration.getBaseURL(), configuration.getTimeout());
 
             Mapper mapper = new InfoResponseMapper();
+            mapper.fromJSON(json);
+
+            return mapper.getLoadedResponse();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public Response getAvailableCurrencies() {
+        try {
+            final String url = configuration.getCompleteURL() + ExchangeRateEndpoints.CURRENCIES.getEndpoint();
+
+            JSONObject json = HTTPRequest.sendGET(url, configuration.getTimeout());
+
+            Mapper mapper = new CurrencyMapper();
             mapper.fromJSON(json);
 
             return mapper.getLoadedResponse();
