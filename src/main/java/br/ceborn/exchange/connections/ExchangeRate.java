@@ -38,6 +38,11 @@ public class ExchangeRate {
         }
     }
 
+    /**
+     * Get for currencies supported by the API.
+     *
+     * @return Response
+     */
     public Response getAvailableCurrencies() {
         try {
             final String url = configuration.getCompleteURL() + ExchangeRateEndpoints.CURRENCIES.getEndpoint();
@@ -53,22 +58,74 @@ public class ExchangeRate {
         }
     }
 
+    /**
+     * Get the latest quotes available from the API.
+     *
+     * @return Response
+     */
     public Response getLatestExchange() {
         return this.getExchange(new Date(), null, CurrencyBase.USD, null);
     }
 
-    public Response getExchange(Date iniDate){
+    /**
+     * Get the latest quotes available from the API.
+     *
+     * @return Response
+     */
+    public Response getLatestExchange(CurrencyBase currencyBase) {
+        return this.getExchange(new Date(), null, currencyBase, null);
+    }
+
+    /**
+     * Get the latest quotes available from the API.
+     *
+     * @return Response
+     */
+    public Response getLatestExchange(CurrencyBase[] symbols) {
+        return this.getExchange(new Date(), null, CurrencyBase.USD, symbols);
+    }
+
+    /**
+     * Get the latest quotes available from the API.
+     *
+     * @return Response
+     */
+    public Response getLatestExchange(CurrencyBase currencyBase, CurrencyBase[] symbols) {
+        return this.getExchange(new Date(), null, currencyBase, symbols);
+    }
+
+    /**
+     * Get the exchange rates available from the API.
+     *
+     * @return Response
+     */
+    public Response getExchange(Date iniDate) {
         return this.getExchange(iniDate, null, CurrencyBase.USD, null);
     }
 
-    public Response getExchange(Date iniDate, Date endDate){
+    /**
+     * Get the exchange rates available from the API.
+     *
+     * @return Response
+     */
+    public Response getExchange(Date iniDate, Date endDate) {
         return this.getExchange(iniDate, endDate, CurrencyBase.USD, null);
     }
 
-    public Response getExchange(Date iniDate, Date endDate, CurrencyBase currencyBase){
+    /**
+     * Get the exchange rates available from the API.
+     *
+     * @return Response
+     */
+    public Response getExchange(Date iniDate, Date endDate, CurrencyBase currencyBase) {
         return this.getExchange(iniDate, endDate, currencyBase, null);
     }
 
+    /**
+     * Get the exchange rates available from the API.
+     *
+     * @return Response
+     */
     public Response getExchange(Date iniDate, Date endDate, CurrencyBase currencyBase, CurrencyBase[] symbols) {
 
         ExchangeRateRequest exchangeRateRequest = new ExchangeRateRequest.ExchangeRateRequestBuilder()
